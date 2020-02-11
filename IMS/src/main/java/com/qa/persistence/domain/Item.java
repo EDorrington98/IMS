@@ -1,20 +1,19 @@
 package com.qa.persistence.domain;
 
-public class Customer{
-
+public class Item {
 	private int id;
 	private String name;
-	private String role;
+	private int value;
 	
-	public Customer(String name, String role) {
+	public Item(String name, int value) {
 		this.name = name;
-		this.role = role;
+		this.value = value;
 	}
 
-	public Customer(int id, String name, String role) {
+	public Item(int id, String name, int value) {
 		this.id = id;
 		this.name = name;
-		this.role = role;
+		this.value = value;
 	}
 	
 	public int getId() {
@@ -33,16 +32,17 @@ public class Customer{
 		this.name = name;
 	}
 
-	public String getRole() {
-		return role;
+	public int getValue() {
+		return value;
 	}
 
-	public void setSurname(String role) {
-		this.role = role;
+	public void setValue(int value) {
+		this.value = value;
 	}
 	
 	public String toString() {
-		return "id:" + id + " name:" + name + " role:" + role;
+		return "id:" + id + " name:" + name + " value:" + value;
 	}
 
 }
+

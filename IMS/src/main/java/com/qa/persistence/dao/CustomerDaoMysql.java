@@ -23,10 +23,10 @@ public class CustomerDaoMysql implements Dao<Customer> {
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("select * from customers");
 			while (resultSet.next()) {
-				Long id = resultSet.getLong("id");
-				String firstName = resultSet.getString("first_name");
-				String surname = resultSet.getString("surname");
-				Customer customer = new Customer(id, firstName, surname);
+				int id = resultSet.getInt("id");
+				String name = resultSet.getString("name");
+				String role = resultSet.getString("role");
+				Customer customer = new Customer(id, name, role);
 				customers.add(customer);
 			}
 		} catch (Exception e) {
@@ -38,19 +38,30 @@ public class CustomerDaoMysql implements Dao<Customer> {
 	public void create(Customer customer) {
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.234.153.182:3306/project_db", Config.username, Config.password)){
 			Statement statement = connection.createStatement();
-			statement.executeUpdate("insert into customers(first_name, surname) values('" + customer.getFirstName() + "','" + customer.getSurname()+"')");
+			statement.executeUpdate("INSERT into customers(name, role) values('" + customer.getName() + "','" + customer.getRole()+"')");
 		} catch (Exception e) {
 			
 		} 
 	}
 
-	public void update(long id, Customer customer) {
-
+	public void update(int id, Customer customer) {
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.234.153.182:3306/project_db", Config.username, Config.password)){
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("UPDATE customers SET name ='" + customer.getName() + "' , role = '" + customer.getRole() + "' WHERE id =" + id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void delete(Customer customer) {
-
+	public void delete(int id) {
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://35.234.153.182:3306/project_db", Config.username, Config.password)){
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("DELETE from customers WHERE id =" + id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
 
 
 

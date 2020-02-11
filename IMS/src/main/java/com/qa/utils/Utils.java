@@ -9,5 +9,9 @@ public class Utils {
 		Scanner scanner = new Scanner(System.in);
 		return scanner.nextLine();
 	}
-
+	public static int getInt() {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		return scanner.nextInt();
+	}
 }
